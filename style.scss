@@ -1,0 +1,83 @@
+body{
+  margin:0;
+  padding: 0;
+  font-size: 1rem;
+  display: flex;
+  min-height: 100vh;
+}
+//むやみにに＊としない
+
+main{
+  //flex: 1;
+  width: 700px;
+  margin: 0 auto;
+
+}
+
+aside{
+  width: 25%;
+  min-width: 250px;
+  //ここで縦に並べる
+  display: flex;
+  flex-direction: column;
+  ul{
+    list-style: none;
+    padding:0;
+    margin: 0;
+  }
+}
+
+div{
+  height: 300px;
+  margin-top: auto;
+}
+
+.open,
+.close{
+  display: none;
+}
+
+input[type="checkbox"]{
+  position: absolute;
+  //100vhの中の50vh分を隠している
+  left: -50vw;
+}
+
+@media screen and (max-width: 1000px){
+  main{
+    width: 100%;
+    padding-top: 50px;
+  }
+  .open,
+  .close{
+    display: block;
+  }
+  .open{
+    //座標で位置を決定する
+    position: absolute;
+  }
+  aside{
+    //レイヤーを作って先に書いたものが上に行く
+    position: absolute;
+    //チェックが入っていない状態
+    left: -250px;
+    //absoluteで持っていた要素が失われる
+    height: 100%;
+    //aside要素内のプロパティーにアニメーションが作られる
+    transition: all 0.2s;
+    background: #fff;
+  }
+  //:checkedはチェックが入っている状態
+  //~でasideに効かせる
+  input[type="checkbox"]:checked ~ aside{
+    left: 0;
+  }
+  input[type="checkbox"]:checked ~ .back{
+    //positionを指定する
+    position: absolute;
+    //どちらも100%にすることで画面全体を表す
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
